@@ -1,0 +1,24 @@
+    void fn(Node* root,int d,map<int,pair<int,int>>&mp,int i){
+        if(root==NULL)
+        return;
+        if(mp.count(i)==0)
+        mp[i]={root->data,d};
+        if(mp[i].second>d)
+        mp[i]={root->data,d};
+        fn(root->left,d+1,mp,i-1);
+        fn(root->right,d+1,mp,i+1);
+    }
+    vector<int> topView(Node *root)
+    {
+        //Your code her
+        vector<int>v;
+        if(root==NULL)
+        return v;
+        map<int,pair<int,int>>mp;
+        fn(root,0,mp,0);
+        for(auto i=mp.begin();i!=mp.end();i++)
+        v.push_back(i->second.first);
+        return v;
+    }
+
+};
