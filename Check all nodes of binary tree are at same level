@@ -1,0 +1,20 @@
+bool find(Node* root,int d,int &init){
+        if(root==NULL)
+        return true;
+        if(root->left==NULL && root->right==NULL)
+        {
+            if(init==0)
+            init=d;
+            else if(init!=d)
+            return false;
+            return true;
+        }
+        return find(root->left,d+1,init) && find(root->right,d+1,init);
+        
+        
+    }
+    bool check(Node *root)
+    {
+        int init=0;
+        return find(root,1,init);
+    }
