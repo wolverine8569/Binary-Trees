@@ -1,0 +1,21 @@
+ int fn(Node* root){
+        if(root==NULL)
+        return 0;
+        int lt=fn(root->left);
+        int rt=fn(root->right);
+        if(lt==0 && rt==0)
+        {
+            int temp=root->data;
+            root->data=0;
+            return temp;
+        }
+        int temp=root->data;
+        root->data=(lt+rt);
+        return temp+lt+rt;
+    }
+    void toSumTree(Node *node)
+    {
+        // Your code here
+        fn(node);
+        
+    }
