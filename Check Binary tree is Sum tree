@@ -1,0 +1,19 @@
+int fn(Node* root,bool &p){
+        if(root==NULL)
+        return 0;
+        int lt=fn(root->left,p);
+        int rt=fn(root->right,p);
+        if(lt==0 && rt==0)
+        return root->data;
+        if(lt+rt!=(root->data))
+        p=false;
+        return root->data+lt+rt;
+    }
+    bool isSumTree(Node* root)
+    {
+         // Your code here
+         bool p=true;
+         fn(root,p);
+         return p;
+         
+    }
