@@ -1,0 +1,42 @@
+void leftBoundary(Node* root,vector<int>&v){
+        if(root==NULL)
+        return;
+        if(root->left!=NULL || root->right!=NULL)
+        v.push_back(root->data);
+        if(root->left)
+        leftBoundary(root->left,v);
+        else if(root->right)
+        leftBoundary(root->right,v);
+    }
+    void rightBoundary(Node* root,vector<int>&v){
+        if(root==NULL)
+        return;
+        if(root->right)
+        rightBoundary(root->right,v);
+        else if(root->left)
+        rightBoundary(root->left,v);
+        if(root->left || root->right)
+        v.push_back(root->data);
+    }
+    void bottomBoundary(Node* root,vector<int>&v){
+        if(root==NULL)
+        return;
+        bottomBoundary(root->left,v);
+        if(root->left==NULL && root->right==NULL)
+        v.push_back(root->data);
+        bottomBoundary(root->right,v);
+    }
+    vector <int> printBoundary(Node *root)
+    {
+        //Your code here
+        vector<int>v;
+        if(root==NULL)
+        return v;
+        v.push_back(root->data);
+        if(!root->left && !root->right)
+        return v;
+        leftBoundary(root->left,v);
+        bottomBoundary(root,v);
+        rightBoundary(root->right,v);
+        return v;
+    }
