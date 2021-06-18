@@ -1,0 +1,17 @@
+    int ind=0;
+    TreeNode* fn(vector<int>& preorder,vector<int>& inorder,int start,int end,unordered_map<int,int>&mp){
+        if(start>end)
+            return NULL;
+        TreeNode* x=new TreeNode(preorder[ind++]);
+        int fo=mp[x->val];
+        x->left=fn(preorder,inorder,start,fo-1,mp);
+        x->right=fn(preorder,inorder,fo+1,end,mp);
+        return x;
+        
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        unordered_map<int,int>mp;
+        for(int i=0;i<inorder.size();i++)
+            mp[inorder[i]]=i;
+        return fn(preorder,inorder,0,inorder.size()-1,mp);
+    }
