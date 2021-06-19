@@ -1,0 +1,15 @@
+int fn(Node* root,int &ans){
+    if(root==NULL)
+    return INT_MAX;
+    int lt=fn(root->left,ans);
+    int rt=fn(root->right,ans);
+    ans=max(ans,root->data-min(lt,rt));
+    return min(min(lt,rt),root->data);
+}
+//Function to return the maximum difference between any node and its ancestor.
+int maxDiff(Node* root)
+{
+    int ans=INT_MIN;
+    fn(root,ans);
+    return ans;
+}
