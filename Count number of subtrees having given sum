@@ -1,0 +1,17 @@
+int fn(Node* root,int X,int &ans){
+    if(root==NULL)
+	return 0;
+	int lt=fn(root->left,X,ans);
+	int rt=fn(root->right,X,ans);
+	if(lt+rt+root->data==X)
+	ans++;
+	return lt+rt+root->data;
+}
+int countSubtreesWithSumX(Node* root, int X)
+{
+	// Code here
+	int ans=0;
+	fn(root,X,ans);
+	return ans;
+
+}
