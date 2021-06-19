@@ -1,0 +1,23 @@
+Node *createTree(int parent[], int N)
+{
+    // Your code here
+    if(N==0)
+    return NULL;
+    unordered_map<int,Node*>mp;
+    Node* root=NULL;
+    for(int i=0;i<N;i++){
+        mp[i]=new Node(i);
+        if(parent[i]==-1)
+            root=mp[i];
+    }
+    for(int i=0;i<N;i++){
+        if(parent[i]!=-1){
+        Node* x=mp[parent[i]];
+        if(x->left==NULL)
+           x->left =mp[i];
+        else if(x->right==NULL)
+           x->right=mp[i];
+        }
+    }
+    return root;
+}
