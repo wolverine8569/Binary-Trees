@@ -1,0 +1,18 @@
+int find(Node* root,int &ans)
+    {
+        // Your code goes here
+        if(root==NULL)
+        return 0;
+        int lt=find(root->left,ans);
+        int rt=find(root->right,ans);
+        ans=max(ans,lt+rt+root->data);
+        ans=max(ans,max(lt,rt)+root->data);
+        ans=max(ans,root->data);
+        return max(max(lt,rt)+root->data,root->data);
+    }
+    int findMaxSum(Node* root)
+    {
+        int ans=INT_MIN;
+        find(root,ans);
+        return ans;
+    }
