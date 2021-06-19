@@ -1,0 +1,22 @@
+int postindex=0;
+Node* build(int in[],int post[],int start,int end){
+    if(start>end)
+    return NULL;
+    Node* root=new Node(post[postindex--]);
+    int fo;
+    for(int i=start;i<=end;i++){
+        if(in[i]==root->data)
+        {
+            fo=i;
+            break;
+        }
+    }
+    root->right=build(in,post,fo+1,end);
+    root->left=build(in,post,start,fo-1);
+    return root;
+}
+Node *buildTree(int in[], int post[], int n) {
+    // Your code here
+    postindex=n-1;
+    return build(in,post,0,n-1);
+}
