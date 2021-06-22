@@ -1,0 +1,15 @@
+bool IsMirror(Node* t1 ,Node* t2){
+    if(t1==NULL && t2==NULL)
+    return true;
+    if(t1==NULL || t2==NULL)
+    return false;
+    return IsMirror(t1->left,t2->right) && IsMirror(t1->right,t2->left);
+}
+bool IsFoldable(Node* root)
+{
+    // Your code goes here
+    if(root==NULL)
+    return true;
+    return IsMirror(root->left,root->right);
+    
+}
