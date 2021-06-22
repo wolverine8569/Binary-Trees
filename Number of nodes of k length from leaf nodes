@@ -1,0 +1,20 @@
+void fn(Node* root,int k,vector<bool>&visited,int &ans,int len=0){
+    if(root==NULL)
+    return;
+    visited[len++]=0;
+    if(root->left==NULL && root->right==NULL && len-k-1>=0 && visited[len-k-1]==0){
+        ans++;
+        visited[len-k-1]=1;
+        return;
+    }
+    fn(root->left,k,visited,ans,len);
+    fn(root->right,k,visited,ans,len);
+}
+int printKDistantfromLeaf(Node* root, int k)
+{
+	//Add your code here. 
+	int ans=0;
+	vector<bool>visited(100000,0);
+	fn(root,k,visited,ans);
+	return ans;
+}
