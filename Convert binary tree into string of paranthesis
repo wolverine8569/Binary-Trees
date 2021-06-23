@@ -1,0 +1,12 @@
+ string tree2str(TreeNode* root) {
+        if(root==NULL)
+            return "";
+        if(root->left==NULL && root->right==NULL)
+            return to_string(root->val);
+        string ls=tree2str(root->left);
+        string rs=tree2str(root->right);
+        if(rs=="")
+            return to_string(root->val)+'('+ls+')';
+        else
+            return to_string(root->val)+'('+ls+')'+'('+rs+')';
+    }
