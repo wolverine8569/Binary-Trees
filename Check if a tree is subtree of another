@@ -1,0 +1,57 @@
+ //O(n*m) time complexity
+ bool isSame(TreeNode* one,TreeNode* two){
+        if(one==NULL && two==NULL)
+            return true;
+        if(one==NULL || two==NULL)
+            return false;
+        return (one->val==two->val) && isSame(one->left,two->left) && isSame(one->right,two->right);
+    }
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty()){
+            TreeNode* x=q.front();
+            q.pop();
+            if(x->val==subRoot->val)
+            {
+                if(isSame(x,subRoot))
+                    return true;  
+            }
+            if(x->left)
+                q.push(x->left);
+            if(x->right)
+                q.push(x->right);
+        }
+        return false;
+    }
+    // O(n) time complexity
+     void pre(TreeNode* root,string &s){
+         if(root==NULL){
+             s+='$';
+             return;
+         }
+         s+=to_string(root->val);
+         pre(root->left,s);
+         pre(root->right,s);
+     }
+    void in(TreeNode* root,string &s){
+         if(root==NULL){
+             s+='$';
+             return;
+         }
+         in(root->left,s);
+         s+=to_string(root->val);
+         in(root->right,s);
+     }
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        string s1="",s2="",s3="",s4="";
+        in(root,s1);
+        in(subRoot,s2);
+        pre(root,s3);
+        pre(subRoot,s4);
+        size_t found1=s1.find(s2);
+        size_t found2=s3.find(s4);
+        if((found1!=string::npos) && (found2!=string::npos))
+            return true;
+        return false;
+    }
