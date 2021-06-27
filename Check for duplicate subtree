@@ -1,0 +1,24 @@
+string fn(Node* root,unordered_map<string,int>&mp){
+    if(root==NULL)
+    return "$";
+    string s="";
+    if(root->left==NULL && root->right==NULL)
+    {
+        s+=to_string(root->data);
+        return s;
+    }
+    s+=to_string(root->data);
+    s+=fn(root->left,mp);
+    s+=fn(root->right,mp);
+    mp[s]++;
+    return s;
+}
+bool dupSub(Node *root)
+{
+     unordered_map<string,int>mp;
+     fn(root,mp);
+     for(auto i=mp.begin();i!=mp.end();i++){
+         if(i->second>1)
+         return true;
+     }
+     return false;
