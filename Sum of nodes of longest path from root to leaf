@@ -1,0 +1,27 @@
+void helper(Node* root,int &ans){
+        queue<pair<Node*,int>>q;
+        q.push({root,root->data});
+        while(!q.empty()){
+            int n=q.size();
+            int ans1=0;
+            for(int i=0;i<n;i++){
+                 Node* x=q.front().first;
+                 int y=q.front().second;
+                 q.pop();
+                 if(x->left==NULL && x->right==NULL)
+                 ans1=max(ans1,y);
+                 if(x->left)
+                 q.push({x->left,x->left->data+y});
+                if(x->right)
+                q.push({x->right,x->right->data+y});
+            }
+            if(q.empty())
+            ans=ans1;
+        }
+    }
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+        int ans=INT_MIN;
+        helper(root,ans);
+        return ans;
+    }
