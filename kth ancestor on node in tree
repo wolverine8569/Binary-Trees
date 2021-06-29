@@ -1,0 +1,36 @@
+int kthAncestor(Node *root, int k, int node)
+{
+    unordered_map<Node*,Node*>mp;
+    mp[root]=NULL;
+    queue<Node*>q;
+    q.push(root);
+    Node* ans=NULL;
+    while(!q.empty()){
+        Node* x=q.front();
+        q.pop();
+        if(x->data==node)
+        {
+            ans=x;
+            break;
+        }
+        if(x->left)
+        {
+            mp[x->left]=x;
+            q.push(x->left);
+        }
+        if(x->right){
+            mp[x->right]=x;
+            q.push(x->right);
+        }
+    }
+    if(ans==NULL)
+    return -1;
+    while(k-- && ans!=NULL)
+    ans=mp[ans];
+    if(k>0)
+    return -1;
+    if(ans==NULL)
+    return -1;
+    else
+    return ans->data;
+}
