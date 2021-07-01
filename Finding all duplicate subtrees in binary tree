@@ -1,0 +1,18 @@
+string pre(Node* root,map<string,int>&co,vector<Node*>&ans){
+    if(!root) return "$";
+    string str="";
+    str+=pre(root->left,co,ans);
+    str+=to_string(root->data);
+    str+=pre(root->right,co,ans);
+    co[str]++;
+    if(co[str]==2)
+    ans.push_back(root);
+    return str;
+}
+vector<Node*> printAllDups(Node* root)
+{
+    vector<Node*>ans;
+    map<string,int>co;
+    pre(root,co,ans);
+    return ans;
+}
