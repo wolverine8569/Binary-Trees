@@ -1,0 +1,19 @@
+void helper(TreeNode* root,vector<int>&v,int tg,int &ans){
+        if(!root) return;
+        v.push_back(root->val);
+        helper(root->left,v,tg,ans);
+        helper(root->right,v,tg,ans);
+        int f=0;
+        for(int i=v.size()-1;i>=0;i--){
+            f+=v[i];
+            if(f==tg)
+                ans++;
+        }
+        v.pop_back();
+    }
+    int pathSum(TreeNode* root, int targetSum) {
+        vector<int>v;
+        int ans=0;
+        helper(root,v,targetSum,ans);
+        return ans;
+    }
